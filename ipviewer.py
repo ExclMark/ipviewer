@@ -12,27 +12,25 @@ def clear_screen():
 
 def check_update():
 	# Check for newer version of ipviewer
-    try:
-        r = requests.get("https://raw.githubusercontent.com/ExclMark/ipviewer/main/ipviewer.py")
-        remote_version = str(re.findall('__version__ = "(.*)"', r.text)[0])
-        local_version = __version__
-
-        if remote_version != local_version:
-            print("\033[93mUpdate Available!\n" +
-                  f"You are running version \033[96m{local_version}\033[93m. Version \033[96m{remote_version}\033[93m is available at \033[96m\033[1m\033[4mhttps://github.com/ExclMark/ipviewer\033[0m")
-
-    except Exception as error:
-        print(f"\033[91mA problem occurred while checking for an update: {error}")
+	try:
+		r = requests.get("https://raw.githubusercontent.com/ExclMark/ipviewer/main/ipviewer.py")
+		remote_version = str(re.findall('__version__ = "(.*)"', r.text)[0])
+		local_version = __version__
+		if remote_version != local_version:
+			print("\033[93mUpdate Available!")
+			print(f"You are running version \033[96m{local_version}\033[93m. Version \033[96m{remote_version}\033[93m is available at \033[96m\033[1m\033[4mhttps://github.com/ExclMark/ipviewer\033[0m")
+	except Exception as error:
+		print(f"\033[91mA problem occurred while checking for an update: {error}")
 
 def get_info(ip):
 	try:
 		# Clearing terminal
 		clear_screen()
 		print(f"\033[96m\033[1mChecking info about \033[94m\033[1m{ip}\033[96m\033[1m:\033[0m")
-
+	
 		# Requesting for ip details
 		response = requests.get(url=f'http://ip-api.com/json/{ip}').json()
-
+	
 		ip = response.get("query")
 		region = response.get("region")
 		region_name = response.get("regionName")
@@ -44,7 +42,7 @@ def get_info(ip):
 		lat = response.get("lat")
 		lon = response.get("lon")
 		tz = response.get("timezone")
-
+	
 		print("")
 		print(f"\033[96m  > \033[0m[\033[92mCOUNTRY\033[0m]:           \033[94m\033[1m{country}\033[0m")
 		print(f"\033[96m  > \033[0m[\033[92mREGION\033[0m]:            \033[94m\033[1m{region}\033[0m")
@@ -76,9 +74,6 @@ def get_info(ip):
 		print(input("Press enter to return to home screen... "))
 		clear_screen()
 		logo()
-	except KeyboardInterrupt:
-		print("\n\033[94m\033[1mBye!\033[0m")
-		sys.exit()
 
 def query():
 	print("\033[92mSelect option:")
@@ -101,27 +96,31 @@ def logo():
 	print("")
 
 def main():
-	clear_screen()
-	logo()
-	check_update()
-	sleep(1)
-
-	while True:
-		query_ = query()
-
-		if query_ == "1":
-			ip = requests.get(url=f'http://api.ipify.org/').content.decode("utf-8")
-			get_info(ip)
-		elif query_ == "2":
-			# Asking for ip
-			sleep(1)
-			ip = input("\033[92m\033[1mEnter ip: \033[0m")
-			get_info(ip)
-		elif query_ == "9":
-			print("\033[94m\033[1mBye!\033[0m")
-			sys.exit()
-		else:
-			print("\033[93mIncorrect option given.")
+	try:
+		clear_screen()
+		logo()
+		check_update()
+		sleep(1)
+	
+		while True:
+			query_ = query()
+	
+			if query_ == "1":
+				ip = requests.get(url=f'http://api.ipify.org/').content.decode("utf-8")
+				get_info(ip)
+			elif query_ == "2":
+				# Asking for ip
+				sleep(1)
+				ip = input("\033[92m\033[1mEnter ip: \033[0m")
+				get_info(ip)
+			elif query_ == "9":
+				print("\033[94m\033[1mBye!\033[0m")
+				sys.exit()
+			else:
+				print("\033[93mIncorrect option given.")
+	except KeyboardInterrupt:
+		print("\n\033[94m\033[1mBye!\033[0m")
+		sys.exit()
 
 
 if __name__ == "__main__":
