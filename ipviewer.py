@@ -1,7 +1,7 @@
 import requests, sys, os, re
 from time import sleep
 
-__version__ = 0.2
+__version__ = "0.2.0"
 
 def clear_screen():
 	sleep(0.7)
@@ -13,8 +13,8 @@ def clear_screen():
 def check_update():
 	# Check for newer version of ipviewer
     try:
-        r = requests.get("https://raw.githubusercontent.com/ExclMark/ipviewer/ipviewer.py")
-
+        r = requests.get("https://raw.githubusercontent.com/ExclMark/ipviewer/main/ipviewer.py")
+        print(r.text)
         remote_version = str(re.findall('__version__ = "(.*)"', r.text)[0])
         local_version = __version__
 
@@ -96,7 +96,7 @@ def logo():
 	print("\033[94m | || '_ \033[96m\ \ / /| |/ _ \ \ /\ / / _ \ '__|")
 	print("\033[94m | || |_) \033[96m\ V / | |  __/\ V  V /  __/ |   ")
 	print("\033[94m|___| .__/ \033[96m\_/  |_|\___| \_/\_/ \___|_|   ")
-	print("\033[94m    |_|                     \033[93mv0.2   \033[0m")
+	print(f"\033[94m    |_|                     \033[93mv{__version__}   \033[0m")
 	print("\033[93mMade by \033[96m\033[1m\033[4mhttps://github.com/ExclMark\033[0m")
 	print("\033[93mDiscord: \033[96m665234248482947083")
 	print("")
