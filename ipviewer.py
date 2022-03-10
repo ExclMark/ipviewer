@@ -1,7 +1,7 @@
 import requests, sys, os, re
 from time import sleep
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 def clear_screen():
 	sleep(0.7)
@@ -14,7 +14,6 @@ def check_update():
 	# Check for newer version of ipviewer
     try:
         r = requests.get("https://raw.githubusercontent.com/ExclMark/ipviewer/main/ipviewer.py")
-        print(r.text)
         remote_version = str(re.findall('__version__ = "(.*)"', r.text)[0])
         local_version = __version__
 
