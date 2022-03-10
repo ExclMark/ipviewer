@@ -10,5 +10,5 @@
 * ```cd ipviewer```
 * ```python3 ipviewer.py```
 # Screenshots:
-![preview](https://user-images.githubusercontent.com/43936063/157521612-7200a8af-af66-4675-898c-74ce2e479fcd.png)
-![preview_2](https://user-images.githubusercontent.com/43936063/157521636-84400b03-7e8c-4359-bb1c-2a91c0838ac8.png)
+![preview](https://user-images.githubusercontent.com/43936063/157677663-19bdcf8d-ddf7-4207-87b9-4c06cb2cdc71.png)
+![preview_2](https://user-images.githubusercontent.com/43936063/157677680-8a2ed230-8ab6-4d62-963b-23f8e61630bd.png)
